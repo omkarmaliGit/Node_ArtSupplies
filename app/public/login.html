@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="https://t4.ftcdn.net/jpg/08/97/90/95/360_F_897909545_gE9HRNWB4oBFYGoF6zdE5WTkFuujV6de.jpg"
+      type="image/x-icon"
+    />
+    <title>BFM | Login</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header1">
+        <a href="index.html" class="logo"
+          ><img src="images/indiaArt.png" alt="indiaArt Logo"
+        /></a>
+      </div>
+    </header>
+
+    <div class="form-container">
+      <h1>Login</h1>
+      <form id="login-form">
+        <input type="email" placeholder="Email" id="login-email" required />
+        <input
+          type="password"
+          placeholder="Password"
+          id="login-password"
+          required
+        />
+        <button type="submit">Login</button>
+        <p>
+          Don't have an account? <a href="registration.html">Register here</a>
+        </p>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Check for JWT token in localStorage (or cookies)
+      const user = localStorage.getItem("user"); // If you're storing the JWT in localStorage
+
+      // If a token exists, redirect to the home/dashboard page
+      if (user) {
+        window.location.href = "index.html"; // Replace with your desired page
+      }
+    </script>
+  </body>
+</html>

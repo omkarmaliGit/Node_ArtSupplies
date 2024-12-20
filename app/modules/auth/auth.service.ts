@@ -5,7 +5,6 @@ import { IExcludedPaths } from "./auth.types";
 export const createToken = (payload: any) => {
   const { JWT_SECRET } = process.env;
   const token = sign(payload, JWT_SECRET || "");
-
   return token;
 };
 
@@ -19,7 +18,9 @@ export const authorize = (excludedPaths: IExcludedPaths[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
       if (
-        excludedPaths.find((e) => e.path === req.url && e.method === req.method)
+        excludedPaths.find(
+          (exp) => exp.path === req.url && exp.method === req.method
+        )
       ) {
         return next();
       }
