@@ -151,7 +151,7 @@ function displayIndex() {
                 alt=""
                 style="width: 100%"
               />
-              <div class="container">
+              <div class="recontainer">
                 <h4><b>CRAFTS</b></h4>
               </div>
             </div>
@@ -161,7 +161,7 @@ function displayIndex() {
                 alt=""
                 style="width: 100%"
               />
-              <div class="container">
+              <div class="recontainer">
                 <h4><b>DRAWING</b></h4>
               </div>
             </div>
@@ -171,7 +171,7 @@ function displayIndex() {
                 alt=""
                 style="width: 100%"
               />
-              <div class="container">
+              <div class="recontainer">
                 <h4><b>BRUSHES</b></h4>
               </div>
             </div>
@@ -181,7 +181,7 @@ function displayIndex() {
                 alt=""
                 style="width: 100%"
               />
-              <div class="container">
+              <div class="recontainer">
                 <h4><b>PRINTMAKING</b></h4>
               </div>
             </div>
@@ -191,58 +191,58 @@ function displayIndex() {
       `;
 }
 
-const navCatButton = document.getElementsByClassName("navCatBtn");
-authButton.addEventListener("click", displayProduct);
+const navCatButton = document.getElementById("paintsBtn");
+navCatButton.addEventListener("click", displayProduct());
 
 function displayProduct() {
   const mainContent = document.getElementById("main-content");
   mainContent.innerHTML = `
         <div class="container">
         <div class="card">
-          <img src="https://via.placeholder.com/300x200" alt="Product 1" />
+          <img src="https://d1f0kjhjeqrfvd.cloudfront.net/media/catalog/product/cache/07ef6299fd43c5a83d3154dac9e3d80b/s/2/s2120075.jpg" alt="Product 1" />
           <h3>Acrylic Paint Set</h3>
           <p>High-quality acrylic paints for artists.</p>
-          <div class="price">$25.99</div>
+          <div class="price">₹250</div>
           <button>Buy Now</button>
         </div>
 
         <div class="card">
-          <img src="https://via.placeholder.com/300x200" alt="Product 2" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYYzggBCMHKLqSDUdtYhT_tFupQTsQVJx_Mw&s" alt="Product 2" />
           <h3>Studio Easel</h3>
           <p>Perfect for large-scale art projects.</p>
-          <div class="price">$89.99</div>
+          <div class="price">₹8999</div>
           <button>Buy Now</button>
         </div>
 
         <div class="card">
-          <img src="https://via.placeholder.com/300x200" alt="Product 3" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBe_KRiIkjLG_nAeD2rV8o2TEsI7kzPIsqzg&s" alt="Product 3" />
           <h3>Brush Set</h3>
           <p>Includes brushes of various sizes and types.</p>
-          <div class="price">$15.49</div>
+          <div class="price">₹859</div>
           <button>Buy Now</button>
         </div>
 
         <div class="card">
-          <img src="https://via.placeholder.com/300x200" alt="Product 4" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8nGWTprYIp_E-q8wpAYHmQOQaTKwxXuuTyg&s" alt="Product 4" />
           <h3>Sketchbook</h3>
           <p>Durable and perfect for on-the-go drawing.</p>
-          <div class="price">$10.99</div>
+          <div class="price">₹199</div>
           <button>Buy Now</button>
         </div>
 
         <div class="card">
-          <img src="https://via.placeholder.com/300x200" alt="Product 5" />
+          <img src="https://images.ctfassets.net/f1fikihmjtrp/76JSUHzbqP82Oqdi21DlqE/2a0130257af8e6ba0b1acd2a3f5b8260/01-truth-about-paint-1160x740-1.jpg?q=80" alt="Product 5" />
           <h3>Oil Paints</h3>
           <p>Rich and vibrant colors for oil painting.</p>
-          <div class="price">$29.99</div>
+          <div class="price">₹499</div>
           <button>Buy Now</button>
         </div>
 
         <div class="card">
-          <img src="https://via.placeholder.com/300x200" alt="Product 6" />
+          <img src="https://m.media-amazon.com/images/I/81m2nmeN2TL.jpg" alt="Product 6" />
           <h3>Colored Pencils</h3>
           <p>High-pigment pencils for detailed illustrations.</p>
-          <div class="price">$12.99</div>
+          <div class="price">₹149</div>
           <button>Buy Now</button>
         </div>
       </div>

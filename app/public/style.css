@@ -187,19 +187,20 @@ p {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* Add some padding inside the card container
-.container {
+/* Add some padding inside the card container  */
+.recontainer {
   padding: 2px 16px;
-} */
+} 
 
 /* ---------------------------------------------------------------------- */
 
-/* Movies Container */
+/*  Container */
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 40px;
   padding: 20px;
+  margin: 40px;
 }
 
 .card {
