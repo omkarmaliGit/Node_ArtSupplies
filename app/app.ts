@@ -7,7 +7,7 @@ export const startServer = async () => {
     const app = express();
 
     app.use(express.static(path.join(__dirname, "../../app/public")));
-    console.log(__dirname);
+    // console.log(__dirname);
     registerRoutes(app);
 
     const { PORT } = process.env;

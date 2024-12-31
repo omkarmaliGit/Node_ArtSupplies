@@ -1,6 +1,6 @@
 import { Route, Routes } from "./routes.types";
 import { IExcludedPaths } from "../auth/auth.types";
-import { DummyRouter } from "../user/user.routes";
+import { DummyRouter } from "../product/product.routes";
 
 export const routes: Routes = [
   new Route("/dummy", DummyRouter),

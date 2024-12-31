@@ -47,3 +47,5 @@ export const permit = (permittedRoles: string[]) => {
     next({ statusCode: 403, message: "UNAUTHORIZED" });
   };
 };
+
+export const login = () => {};

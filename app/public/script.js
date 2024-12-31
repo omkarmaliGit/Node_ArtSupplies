@@ -123,134 +123,16 @@ function displayDashboard(role) {
 }
 
 // Navigation logic
-document.getElementById("MoviesBtn").addEventListener("click", () => {
+document.getElementById("ProductsBtn").addEventListener("click", () => {
   if (isLoggedIn()) {
     const user = JSON.parse(localStorage.getItem("user"));
     const decoded = jwt_decode(user.token);
-    displayMovies(decoded.role);
+    displayProducts(decoded.role);
   } else {
     alert("Please log in to access this section.");
     window.location.href = "login.html";
   }
 });
-
-// Display content based on role
-async function displayMovies(role) {
-  const mainContent = document.getElementById("main-content");
-
-  try {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user || !user.token) {
-      alert("User information not found. Please log in again.");
-      return;
-    }
-
-    const authHeader = user ? user.token : null;
-
-    const response = await fetch("/movies", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authHeader}`,
-      },
-    });
-
-    const movies = await response.json();
-
-    if (!response.ok) {
-      throw new Error(movies.message || "Failed to fetch movies");
-    }
-
-    let movieCards = "";
-
-    // Add
-    if (role === "admin") {
-      movieCards += `
-          <form id="add-movie-form" class="form-container">
-            <h2>Add Movie</h2>
-            <input type="text" id="title" placeholder="Title" required />
-            <input type="text" id="genre" placeholder="Genre (comma-separated)" required />
-            <input type="number" id="duration" placeholder="Duration (minutes)" required />
-            <input type="text" id="language" placeholder="Language" required />
-            <input type="number" id="rating" placeholder="Rating" step="0.1" required />
-            <button type="submit">Add Movie</button>
-          </form>
-        `;
-    }
-
-    // Display
-    movieCards += '<div class="movies-container">';
-    movies.forEach((movie) => {
-      movieCards += `
-          <div class="movie-card">
-          <img src="${movie.poster}" alt="${
-        movie.title
-      } Poster" style="width:100%; height:auto;"/>
-              
-          <h3>${movie.title}</h3>
-            <p>Genre: ${movie.genre.join(", ")}</p>
-            <p>Duration: ${movie.duration} mins</p>
-            <p>Language: ${movie.language}</p>
-            <p>Rating: ${movie.rating}</p>
-            ${
-              role === "admin"
-                ? `<button onclick="deleteMovie(${movie.movie_id})">Delete</button>
-                   <button onclick="editMovie(${movie.movie_id})">Edit</button>`
-                : `<button onclick="bookMovie(${movie.movie_id})">Book Now</button>`
-            }
-          </div>
-        `;
-    });
-    movieCards += "</div>";
-    mainContent.innerHTML = movieCards;
-
-    if (role === "admin") {
-      document
-        .getElementById("add-movie-form")
-        .addEventListener("submit", handleAddMovie);
-    }
-  } catch (error) {
-    console.error("Error fetching movies:", error);
-  }
-}
-
-async function handleAddMovie(event) {
-  event.preventDefault();
-  const title = document.getElementById("title").value;
-  const genre = document.getElementById("genre").value.split(",");
-  const duration = parseInt(document.getElementById("duration").value);
-  const language = document.getElementById("language").value;
-  const rating = parseFloat(document.getElementById("rating").value);
-
-  try {
-    await fetch("/movies/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getToken(),
-      },
-      body: JSON.stringify({ title, genre, duration, language, rating }),
-    });
-    alert("Movie added successfully!");
-    displayMovies("admin");
-  } catch (error) {
-    console.error("Error adding movie:", error);
-  }
-}
-
-async function deleteMovie(movieId) {
-  try {
-    await fetch(`/movies/${movieId}/delete`, {
-      method: "DELETE",
-      headers: { Authorization: getToken() },
-    });
-    alert("Movie deleted successfully!");
-    displayMovies("admin");
-  } catch (error) {
-    console.error("Error deleting movie:", error);
-  }
-}
 
 // Display navigation bar and initialize content
 function displayIndex() {
@@ -306,5 +188,63 @@ function displayIndex() {
           </div>
           </section>
         </div>
+      `;
+}
+
+const navCatButton = document.getElementsByClassName("navCatBtn");
+authButton.addEventListener("click", displayProduct);
+
+function displayProduct() {
+  const mainContent = document.getElementById("main-content");
+  mainContent.innerHTML = `
+        <div class="container">
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Product 1" />
+          <h3>Acrylic Paint Set</h3>
+          <p>High-quality acrylic paints for artists.</p>
+          <div class="price">$25.99</div>
+          <button>Buy Now</button>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Product 2" />
+          <h3>Studio Easel</h3>
+          <p>Perfect for large-scale art projects.</p>
+          <div class="price">$89.99</div>
+          <button>Buy Now</button>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Product 3" />
+          <h3>Brush Set</h3>
+          <p>Includes brushes of various sizes and types.</p>
+          <div class="price">$15.49</div>
+          <button>Buy Now</button>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Product 4" />
+          <h3>Sketchbook</h3>
+          <p>Durable and perfect for on-the-go drawing.</p>
+          <div class="price">$10.99</div>
+          <button>Buy Now</button>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Product 5" />
+          <h3>Oil Paints</h3>
+          <p>Rich and vibrant colors for oil painting.</p>
+          <div class="price">$29.99</div>
+          <button>Buy Now</button>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Product 6" />
+          <h3>Colored Pencils</h3>
+          <p>High-pigment pencils for detailed illustrations.</p>
+          <div class="price">$12.99</div>
+          <button>Buy Now</button>
+        </div>
+      </div>
       `;
 }
