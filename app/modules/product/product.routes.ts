@@ -1,16 +1,16 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { ResponseHandler } from "../../utility/response.handler";
-import dummyService from "./user.service";
+import dummyService from "./product.service";
 import { permit } from "../auth/auth.service";
 
 export const DummyRouter = Router();
 
-DummyRouter.get(
-  "/fhsg",
+DummyRouter.post(
+  "/product",
   permit(["admin", "semiAdmin"]),
   (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = dummyService.dummyGet();
+      const result = dummyService.getProduct();
       // result.send(new ResponseHandler(result));
     } catch (e) {
       next(e);
