@@ -1,188 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Add event listeners for login and registration forms
-  const loginForm = document.getElementById("login-form");
-  const registerForm = document.getElementById("register-form");
-
-  if (loginForm) {
-    loginForm.addEventListener("submit", handleLogin);
-  }
-
-  if (registerForm) {
-    registerForm.addEventListener("submit", handleRegistration);
-  }
-
-  const authButton = document.getElementById("auth-button");
   const mainContent = document.getElementById("main-content");
-
-  // Handle login/logout button click
-  authButton.textContent = isLoggedIn() ? "Logout" : "Login";
-  authButton.addEventListener("click", handleAuthClick);
-
-  // Display appropriate content based on authentication state
-  if (mainContent) {
-    if (isLoggedIn()) {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const decoded = jwt_decode(user.token);
-      displayDashboard(decoded.role);
-    } else {
-      displayIndex();
-    }
-  }
+  displayIndex();
 });
 
-// Redirect based on login state
-function handleAuthClick() {
-  if (isLoggedIn()) {
-    logoutUser();
-  } else {
-    window.location.href = "login.html";
-  }
-}
-
-// Handle Login
-async function handleLogin(event) {
-  event.preventDefault();
-  const email = document.getElementById("login-email").value;
-  const password = document.getElementById("login-password").value;
-
-  try {
-    const response = await fetch("/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const result = await response.json();
-    if (response.ok) {
-      alert("Login successful!");
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          token: result.token,
-        })
-      );
-      // Save user data
-      window.location.href = "index.html";
-    } else {
-      alert(result.message || "Login failed!");
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("An error occurred. Please try again.");
-  }
-}
-
-// Handle Registration
-async function handleRegistration(event) {
-  event.preventDefault();
-  const email = document.getElementById("register-email").value;
-  const password = document.getElementById("register-password").value;
-
-  console.log("print something");
-
-  try {
-    const response = await fetch("/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const result = await response.json();
-    if (response.ok) {
-      alert("Registration successful! Please log in.");
-      window.location.href = "login.html";
-    } else {
-      alert(result.message || "Registration failed!");
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("An error occurred. Please try again.");
-  }
-}
-
-// Check if user is logged in
-function isLoggedIn() {
-  return localStorage.getItem("user") !== null;
-}
-
-// Logout user
-function logoutUser() {
-  localStorage.removeItem("user");
-  alert("You have been logged out.");
-  window.location.href = "index.html";
-}
-
-// Display navigation bar and initialize content
-function displayDashboard(role) {
-  const mainContent = document.getElementById("main-content");
-  if (role === "admin") {
-    mainContent.innerHTML = `<h2>Admin Dashboard</h2><p>welcome admin</p>`;
-  } else {
-    mainContent.innerHTML = `<h2>User Dashboard</h2><p>List of movies for users.</p>`;
-  }
-}
-
-// Navigation logic
-document.getElementById("ProductsBtn").addEventListener("click", () => {
-  if (isLoggedIn()) {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const decoded = jwt_decode(user.token);
-    displayProducts(decoded.role);
-  } else {
-    alert("Please log in to access this section.");
-    window.location.href = "login.html";
-  }
-});
-
-// Display navigation bar and initialize content
 function displayIndex() {
   const mainContent = document.getElementById("main-content");
   mainContent.innerHTML = `
         <div class="indexDiv">
         <section class="coverSection">
-          <div><b>HEY ARTIST</b><p>Welcome to the India Art</P></div>
+          <div><h2>Welcome to Wedding Planner</h2><h6>Making your dream wedding a reality</h6></div>
         </section>
           <section class="RecoProducts">
-          <h1>Recommended Products</h1>
+          <h1>Our Services</h1>
           <div>
             <div class="productCard">
               <img
-                src="https://d1f0kjhjeqrfvd.cloudfront.net/media/catalog/category/7246037_1605092214.png"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFv35_unrlGRMJ3oFWqoN2qBrcHq6y8PI-9w&s"
                 alt=""
-                style="width: 100%"
               />
               <div class="recontainer">
-                <h4><b>CRAFTS</b></h4>
+                <h4><b>Invitations</b></h4>
               </div>
             </div>
             <div class="productCard">
               <img
-                src="https://d1f0kjhjeqrfvd.cloudfront.net/media/catalog/category/1628756_1605092214.png"
+                src="https://image.wedmegood.com/resized/450X/uploads/images/4ba2f64476e9490b9e1683e73238e1barealwedding/024A3170LargeLarge.jpeg"
                 alt=""
-                style="width: 100%"
               />
               <div class="recontainer">
-                <h4><b>DRAWING</b></h4>
+                <h4><b>Flowers</b></h4>
               </div>
             </div>
             <div class="productCard">
               <img
-                src="https://d1f0kjhjeqrfvd.cloudfront.net/media/catalog/category/6206962_1605092214.png"
+                src="https://www.theweddingcardsonline.com/cdn/shop/articles/feature-10.jpg?v=1661685208"
                 alt=""
-                style="width: 100%"
               />
               <div class="recontainer">
-                <h4><b>BRUSHES</b></h4>
+                <h4><b>Ceremony</b></h4>
               </div>
             </div>
             <div class="productCard">
               <img
-                src="https://d1f0kjhjeqrfvd.cloudfront.net/media/catalog/category/382011_1605092214.png"
+                src="https://modernwedding.com.au/wp-content/uploads/2019/11/28/ALL-0463.jpg"
                 alt=""
-                style="width: 100%"
               />
               <div class="recontainer">
-                <h4><b>PRINTMAKING</b></h4>
+                <h4><b>Reception</b></h4>
               </div>
             </div>
           </div>
@@ -191,60 +55,153 @@ function displayIndex() {
       `;
 }
 
-const navCatButton = document.getElementById("paintsBtn");
-navCatButton.addEventListener("click", displayProduct());
+const aboutUsButton = document.getElementById("aboutUsBtn");
+aboutUsButton.addEventListener("click", displayAboutUs());
 
-function displayProduct() {
+function displayAboutUs() {
   const mainContent = document.getElementById("main-content");
   mainContent.innerHTML = `
-        <div class="container">
-        <div class="card">
-          <img src="https://d1f0kjhjeqrfvd.cloudfront.net/media/catalog/product/cache/07ef6299fd43c5a83d3154dac9e3d80b/s/2/s2120075.jpg" alt="Product 1" />
-          <h3>Acrylic Paint Set</h3>
-          <p>High-quality acrylic paints for artists.</p>
-          <div class="price">₹250</div>
-          <button>Buy Now</button>
-        </div>
+        <section class="about-section">
+            <h1>About Us</h1>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to Wedding Planner, where dreams are turned into reality. With years of experience in crafting unforgettable weddings, we pride ourselves on delivering excellence in every detail.</p>
+                    <p>Our team of expert planners, designers, and coordinators work closely with you to ensure your special day is as unique as your love story. From venue selection to the final dance, we are dedicated to making your wedding day perfect.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/coverWedding.jpg" alt="Wedding planning team">
+                </div>
+            </div>
+           
+        </section>
+      `;
+}
 
-        <div class="card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYYzggBCMHKLqSDUdtYhT_tFupQTsQVJx_Mw&s" alt="Product 2" />
-          <h3>Studio Easel</h3>
-          <p>Perfect for large-scale art projects.</p>
-          <div class="price">₹8999</div>
-          <button>Buy Now</button>
-        </div>
+const venuesButton = document.getElementById("venuesBtn");
+venuesButton.addEventListener("click", displayVenues());
 
-        <div class="card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBe_KRiIkjLG_nAeD2rV8o2TEsI7kzPIsqzg&s" alt="Product 3" />
-          <h3>Brush Set</h3>
-          <p>Includes brushes of various sizes and types.</p>
-          <div class="price">₹859</div>
-          <button>Buy Now</button>
-        </div>
+function displayVenues() {
+  const mainContent = document.getElementById("main-content");
+  mainContent.innerHTML = `
+        <section class="venues-section">
+            <h1>Our Featured Venues</h1>
+            <p>Discover the perfect settings for your dream wedding. Each venue is handpicked to provide an unforgettable experience.</p>
+            <div class="venues-grid">
+                <div class="venue-card">
+                    <img src="https://www.kalkifashion.com/blogs/wp-content/uploads/2023/01/Wedding-in-udaipur.jpg" alt="Venue 1">
+                    <h2>A regal affair in Udaipur</h2>
+                    <p>Capacity: 300 guests</p>
+                    <p>A luxurious space with stunning chandeliers and a grand dance floor.</p>
+                </div>
+                <div class="venue-card">
+                    <img src="https://www.kalkifashion.com/blogs/wp-content/uploads/2023/01/60e548b58a373a7f865900fd_04d99656_bf8a_4a2d_a2b2_30833018c575-1024x680.jpg" alt="Venue 2">
+                    <h2>Scenic sunset pheras in Kerala</h2>
+                    <p>Capacity: 200 guests</p>
+                    <p>An open-air garden with breathtaking views and lush greenery.</p>
+                </div>
+                <div class="venue-card">
+                    <img src="https://www.kalkifashion.com/blogs/wp-content/uploads/2023/01/andaman-wedding.jpg" alt="Venue 3">
+                    <h2>A dreamy affair on golden sand, under stunning skies</h2>
+                    <p>Capacity: 150 guests</p>
+                    <p>Celebrate your day with the soothing sound of waves and stunning sunsets.</p>
+                </div>
+                <div class="venue-card">
+                    <img src="https://www.kalkifashion.com/blogs/wp-content/uploads/2023/01/goabeachhotel10-1024x682.jpg" alt="Venue 4">
+                    <h2>A beach-themed Goan wedding</h2>
+                    <p>Capacity: 350 guests</p>
+                    <p>Goa is the perfect wedding destination for couples who want to have their wedding under the open sky.</p>
+                </div>
+                <div class="venue-card">
+                    <img src="https://www.kalkifashion.com/blogs/wp-content/uploads/2023/01/Oberoi-Amarvilas-Agra-3.jpg" alt="Venue 5">
+                    <h2>In dreamy and romantic Agra</h2>
+                    <p>Capacity: 500 guests</p>
+                    <p>What better way than getting married in front of the Taj Mahal, the epitome of true love. It is considered like a paradise for Agra lovers.</p>
+                </div>
+                <div class="venue-card">
+                    <img src="https://www.kalkifashion.com/blogs/wp-content/uploads/2023/01/jw-marriott-mussoorie-4-1024x804.jpg" alt="Venue 6">
+                    <h2>Amidst snow capped mountains in Mussoorie</h2>
+                    <p>Capacity: 100 guests</p>
+                    <p>The best romantic wedding destination in India for couples who dream of having a beach wedding amidst snow-capped peaks and beautiful hills.</p>
+                </div>
+            </div>
+        </section>
+      `;
+}
 
-        <div class="card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8nGWTprYIp_E-q8wpAYHmQOQaTKwxXuuTyg&s" alt="Product 4" />
-          <h3>Sketchbook</h3>
-          <p>Durable and perfect for on-the-go drawing.</p>
-          <div class="price">₹199</div>
-          <button>Buy Now</button>
-        </div>
+const servicesButton = document.getElementById("servicesBtn");
+servicesButton.addEventListener("click", displayServices());
 
-        <div class="card">
-          <img src="https://images.ctfassets.net/f1fikihmjtrp/76JSUHzbqP82Oqdi21DlqE/2a0130257af8e6ba0b1acd2a3f5b8260/01-truth-about-paint-1160x740-1.jpg?q=80" alt="Product 5" />
-          <h3>Oil Paints</h3>
-          <p>Rich and vibrant colors for oil painting.</p>
-          <div class="price">₹499</div>
-          <button>Buy Now</button>
-        </div>
+function displayServices() {
+  const mainContent = document.getElementById("main-content");
+  mainContent.innerHTML = `
+        <section class="services-section">
+            <h1>Our Services</h1>
+            <p>We offer a wide range of services to make your special day truly unforgettable.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h2>First Things First</h2>
+                    <p>Comprehensive planning and organization to kickstart your wedding journey. From budget planning to scheduling, we cover all the initial steps.</p>
+                </div>
+                <div class="service-card">
+                    <h2>Invitations</h2>
+                    <p>Beautifully designed wedding invitations that set the tone for your big day. Custom designs are available to match your theme and preferences.</p>
+                </div>
+                <div class="service-card">
+                    <h2>Flowers</h2>
+                    <p>Stunning floral arrangements to enhance the beauty of your venue. Choose from a variety of flowers to match your color palette and theme.</p>
+                </div>
+                <div class="service-card">
+                    <h2>Pampering</h2>
+                    <p>Exclusive pampering sessions to ensure you look and feel your best. Our packages include spa treatments, makeup, and grooming for the bride and groom.</p>
+                </div>
+                <div class="service-card">
+                    <h2>Apparel</h2>
+                    <p>Elegant wedding attire for the bride, groom, and bridal party. We provide consultation and fittings to ensure a perfect look for your big day.</p>
+                </div>
+                <div class="service-card">
+                    <h2>Ceremony</h2>
+                    <p>Perfectly planned ceremonies tailored to your preferences. From officiants to rituals, we ensure every detail aligns with your vision.</p>
+                </div>
+                <div class="service-card">
+                    <h2>Reception</h2>
+                    <p>Exceptional reception planning to create unforgettable memories. We handle everything from seating arrangements to entertainment.</p>
+                </div>
+            </div>
+        </section>
+      `;
+}
 
-        <div class="card">
-          <img src="https://m.media-amazon.com/images/I/81m2nmeN2TL.jpg" alt="Product 6" />
-          <h3>Colored Pencils</h3>
-          <p>High-pigment pencils for detailed illustrations.</p>
-          <div class="price">₹149</div>
-          <button>Buy Now</button>
-        </div>
-      </div>
+const contactUsButton = document.getElementById("contactUsBtn");
+contactUsButton.addEventListener("click", displayContactUs());
+
+function displayContactUs() {
+  const mainContent = document.getElementById("main-content");
+  mainContent.innerHTML = `
+         <section class="contact-section">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you! Fill out the form below or reach us using the contact details provided.</p>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Our Contact Details</h2>
+                    <p><strong>Email:</strong> info@weddingplanner.com</p>
+                    <p><strong>Phone:</strong> +1 123 456 7890</p>
+                    <p><strong>Address:</strong> 123 Wedding Lane, Pune City</p>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
       `;
 }

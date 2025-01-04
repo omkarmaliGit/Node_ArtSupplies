@@ -1,13 +1,16 @@
 import express from "express";
 import { registerRoutes } from "./modules/routes/routes.register";
 import path from "path";
+import { connectToMongo } from "./connections/mongo.connect";
 
 export const startServer = async () => {
   try {
     const app = express();
 
+    await connectToMongo();
+
     app.use(express.static(path.join(__dirname, "../../app/public")));
-    // console.log(__dirname);
+
     registerRoutes(app);
 
     const { PORT } = process.env;
