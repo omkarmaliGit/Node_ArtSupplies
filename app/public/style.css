@@ -190,7 +190,7 @@ p {
 /* Add some padding inside the card container  */
 .recontainer {
   padding: 2px 16px;
-} 
+}
 
 /* ---------------------------------------------------------------------- */
 
@@ -249,4 +249,119 @@ p {
 
 .card button:hover {
   background-color: #555;
+}
+
+/* -------------------------------------------------------------- */
+
+/* About Us Section */
+.about-section {
+  padding: 2rem;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 800px;
+  border-radius: 8px;
+}
+
+.about-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #4caf50;
+}
+
+.about-section p {
+  margin-bottom: 2rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.about-section ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.about-section ul li {
+  margin-bottom: 1rem;
+}
+
+/* Contact Us Section */
+.contact-section {
+  padding: 2rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 800px;
+  border-radius: 8px;
+}
+
+.contact-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #4caf50;
+}
+
+.contact-section p {
+  margin-bottom: 2rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.contact-section form {
+  margin-bottom: 2rem;
+}
+
+.contact-section form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.contact-section form input,
+.contact-section form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.contact-section form button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.contact-section form button:hover {
+  background-color: #45a049;
+}
+
+.contact-section .contact-info {
+  text-align: left;
+}
+
+.contact-section .contact-info h2 {
+  color: #4caf50;
+  margin-bottom: 0.5rem;
+}
+
+.contact-section .contact-info p {
+  margin: 0.5rem 0;
+}
+
+.contact-section .contact-info a {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.contact-section .contact-info a:hover {
+  text-decoration: underline;
 }

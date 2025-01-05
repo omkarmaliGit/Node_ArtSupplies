@@ -248,3 +248,60 @@ function displayProduct() {
       </div>
       `;
 }
+
+function displayAboutUs() {
+  const mainContent = document.getElementById("main-content");
+  mainContent.innerHTML = `
+<section class="about-section">
+            <h1>About Us</h1>
+            <p>Welcome to the Art Supplies Store, your one-stop destination for all your creative needs. Whether you’re a professional artist or just beginning your artistic journey, we have everything you need to bring your ideas to life.</p>
+
+            <h2>Our Offerings</h2>
+            <ul>
+                <li><strong>Paints and Mediums:</strong> A wide variety of acrylics, oils, and watercolors to suit every style.</li>
+                <li><strong>Studio Supplies:</strong> Easels, canvases, and tools to set up your perfect creative space.</li>
+                <li><strong>Crafts:</strong> Unique materials for DIY projects and handcrafted items.</li>
+                <li><strong>Brands:</strong> Top-quality products from trusted art supply brands.</li>
+                <li><strong>Printmaking:</strong> Supplies for block printing, etching, and more.</li>
+                <li><strong>Brushes and Painting Tools:</strong> Brushes, palettes, and knives for precise application.</li>
+                <li><strong>Drawing and Illustration:</strong> Pencils, markers, and sketchbooks for illustrators and designers.</li>
+            </ul>
+
+            <p>At the Art Supplies Store, we’re committed to providing high-quality products and exceptional customer service to support your creative endeavors.</p>
+        </section>
+  `;
+}
+
+function displayContactUs() {
+  const mainContent = document.getElementById("main-content");
+  mainContent.innerHTML = `
+<section class="contact-section">
+            <h1>Contact Us</h1>
+            <p>We’d love to hear from you! Whether you have a question about our products, need assistance, or just want to share your creative projects, feel free to reach out.</p>
+
+            <form action="#" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+
+            <div class="contact-info">
+                <h2>Our Address</h2>
+                <p>123 Creative Lane, Pune City, MH 456781</p>
+
+                <h2>Phone</h2>
+                <p>+1 234 567 890</p>
+
+                <h2>Email</h2>
+                <p><a href="mailto:info@indiaart.com">info@indiaart.com</a></p>
+            </div>
+        </section>
+  `;
+}
