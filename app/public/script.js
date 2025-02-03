@@ -53,12 +53,13 @@ async function handleLogin(event) {
     });
 
     const result = await response.json();
+
     if (response.ok) {
       alert("Login successful!");
       localStorage.setItem(
         "user",
         JSON.stringify({
-          token: result.token,
+          token: result.data.Token,
         })
       );
       // Save user data
@@ -77,8 +78,6 @@ async function handleRegistration(event) {
   event.preventDefault();
   const email = document.getElementById("register-email").value;
   const password = document.getElementById("register-password").value;
-
-  console.log("print something");
 
   try {
     const response = await fetch("/auth/register", {
@@ -115,10 +114,10 @@ function logoutUser() {
 // Display navigation bar and initialize content
 function displayDashboard(role) {
   const mainContent = document.getElementById("main-content");
-  if (role === "admin") {
+  if (role === "ADMIN") {
     mainContent.innerHTML = `<h2>Admin Dashboard</h2><p>welcome admin</p>`;
   } else {
-    mainContent.innerHTML = `<h2>User Dashboard</h2><p>List of movies for users.</p>`;
+    mainContent.innerHTML = `<h2>User Dashboard</h2><p>welcome user</p>`;
   }
 }
 
@@ -194,59 +193,43 @@ function displayIndex() {
 const navCatButton = document.getElementById("paintsBtn");
 navCatButton.addEventListener("click", displayProduct());
 
-function displayProduct() {
+async function displayProduct() {
   const mainContent = document.getElementById("main-content");
-  mainContent.innerHTML = `
-        <div class="container">
-        <div class="card">
-          <img src="https://d1f0kjhjeqrfvd.cloudfront.net/media/catalog/product/cache/07ef6299fd43c5a83d3154dac9e3d80b/s/2/s2120075.jpg" alt="Product 1" />
-          <h3>Acrylic Paint Set</h3>
-          <p>High-quality acrylic paints for artists.</p>
-          <div class="price">₹250</div>
-          <button>Buy Now</button>
-        </div>
 
-        <div class="card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYYzggBCMHKLqSDUdtYhT_tFupQTsQVJx_Mw&s" alt="Product 2" />
-          <h3>Studio Easel</h3>
-          <p>Perfect for large-scale art projects.</p>
-          <div class="price">₹8999</div>
-          <button>Buy Now</button>
-        </div>
+  try {
+    // Fetch product data from the backend
+    const response = await fetch("/product");
 
-        <div class="card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBe_KRiIkjLG_nAeD2rV8o2TEsI7kzPIsqzg&s" alt="Product 3" />
-          <h3>Brush Set</h3>
-          <p>Includes brushes of various sizes and types.</p>
-          <div class="price">₹859</div>
-          <button>Buy Now</button>
-        </div>
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
 
-        <div class="card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8nGWTprYIp_E-q8wpAYHmQOQaTKwxXuuTyg&s" alt="Product 4" />
-          <h3>Sketchbook</h3>
-          <p>Durable and perfect for on-the-go drawing.</p>
-          <div class="price">₹199</div>
-          <button>Buy Now</button>
-        </div>
+    const productsJson = await response.json(); // Assuming the API returns an array of products
 
-        <div class="card">
-          <img src="https://images.ctfassets.net/f1fikihmjtrp/76JSUHzbqP82Oqdi21DlqE/2a0130257af8e6ba0b1acd2a3f5b8260/01-truth-about-paint-1160x740-1.jpg?q=80" alt="Product 5" />
-          <h3>Oil Paints</h3>
-          <p>Rich and vibrant colors for oil painting.</p>
-          <div class="price">₹499</div>
-          <button>Buy Now</button>
-        </div>
+    const products = productsJson.data;
 
-        <div class="card">
-          <img src="https://m.media-amazon.com/images/I/81m2nmeN2TL.jpg" alt="Product 6" />
-          <h3>Colored Pencils</h3>
-          <p>High-pigment pencils for detailed illustrations.</p>
-          <div class="price">₹149</div>
-          <button>Buy Now</button>
-        </div>
+    // Generate HTML dynamically
+    const productHTML = products
+      .map(
+        (product) => `
+      <div class="card">
+        <img src="${product.imgLink}" alt="${product.name}" />
+        <h3>${product.name}</h3>
+        <p>${product.detail}</p>
+        <div class="price">₹${product.price}</div>
+        <button>Buy Now</button>
       </div>
-      `;
+    `
+      )
+      .join("");
+
+    // Add the dynamic HTML to the main content
+    mainContent.innerHTML = `<div class="container">${productHTML}</div>`;
+  } catch (error) {
+    // Handle errors
+    mainContent.innerHTML = `<p>Error loading products: ${error.message}</p>`;
+    console.error("Error fetching products:", error);
+  }
 }
 
 function displayAboutUs() {
